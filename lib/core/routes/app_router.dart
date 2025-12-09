@@ -1,9 +1,8 @@
 import 'package:ecommerce/features/auth/presentation/views/forgot_password_view.dart';
-import 'package:ecommerce/features/home/presentaion/view/data/cubit.dart';
+import 'package:ecommerce/features/home/presentaion/view/data/home_cubit.dart';
 import 'package:ecommerce/features/home/presentaion/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/sign_up_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
@@ -25,7 +24,7 @@ abstract class AppRouter {
       case Routes.home:
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
-            providers: [BlocProvider(create: (_) => MainCubit())],
+            providers: [BlocProvider(create: (_) => HomeCubit())],
             child: const HomeView(),
           ),
         );
