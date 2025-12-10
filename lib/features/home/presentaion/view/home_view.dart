@@ -1,25 +1,25 @@
-import 'package:ecommerce/features/home/presentaion/view/data/home_cubit.dart';
-import 'package:ecommerce/features/home/presentaion/view/data/home_state.dart';
-import 'package:ecommerce/features/home/presentaion/view/widget/bottom_navigation_widget.dart';
+import 'package:ecommerce/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
-      builder: (context, state) {
-        final Cubit = context.read<HomeCubit>();
-        return Scaffold(
-          body: Cubit.currentPage,
-          bottomNavigationBar: AppBottomNavBar(
-            currentIndex: Cubit.currentIndex,
-            onTap: Cubit.changeTab,
+    return Scaffold(
+      body: Center(
+        child: Container(
+          height: 200,
+          width: 200,
+          color: AppColors.errorColor,
+          child: Center(
+            child: Text(
+              'Home View',
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
