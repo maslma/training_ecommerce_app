@@ -18,12 +18,17 @@ class _SignUpFormState extends State<SignUpForm> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FocusNode nameFocusNode = FocusNode();
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
+   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
+      autovalidateMode: autovalidateMode,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -32,15 +37,12 @@ class _SignUpFormState extends State<SignUpForm> {
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
             validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return "Name cannot be empty";
-              }
-              if (value.length < 3) {
-                return "Name must be at least 3 characters";
-              }
-              return null;
+              return Vildators.validateName(value);
             },
             controller: nameController,
+            focusNode: nameFocusNode,
+            editingComplete: () =>
+                FocusScope.of(context).requestFocus(emailFocusNode),
           ),
           8.verticalSizedBox,
           AppTextField(
@@ -48,15 +50,12 @@ class _SignUpFormState extends State<SignUpForm> {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return "Email cannot be empty";
-              }
-              if (!AppRegex.isEmailValid(value.trim())) {
-                return "Please enter a valid email address";
-              }
-              return null;
+              return Vildators.validateEmail(value);
             },
             controller: emailController,
+            focusNode: emailFocusNode,
+            editingComplete: () =>
+                FocusScope.of(context).requestFocus(passwordFocusNode),
           ),
           8.verticalSizedBox,
           AppTextField(
@@ -64,27 +63,10 @@ class _SignUpFormState extends State<SignUpForm> {
             keyboardType: TextInputType.visiblePassword,
             textInputAction: TextInputAction.done,
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Password cannot be empty";
-              }
-              if (!AppRegex.hasMinLength(value)) {
-                return "Password must be at least 8 characters";
-              }
-              if (!AppRegex.hasUpperCase(value)) {
-                return "Password must contain an uppercase letter";
-              }
-              if (!AppRegex.hasLowerCase(value)) {
-                return "Password must contain a lowercase letter";
-              }
-              if (!AppRegex.hasNumber(value)) {
-                return "Password must include a number";
-              }
-              if (!AppRegex.hasSpecialCharacter(value)) {
-                return "Password must include a special character";
-              }
-              return null;
+              return Vildators.validatePassword(value);
             },
             controller: passwordController,
+            focusNode: passwordFocusNode, 
           ),
           16.verticalSizedBox,
           NavigateTextWidget(
@@ -97,10 +79,14 @@ class _SignUpFormState extends State<SignUpForm> {
           MainButton(
             title: "SIGN UP",
             onTap: () {
+              _formKey.currentState!.reset();
               if (_formKey.currentState!.validate()) {
                 context.pushNamed(Routes.login);
+              } else {
+                setState(() {
+                  autovalidateMode = AutovalidateMode.always;
+                });
               }
-              print("SIGN UP SUCCESS");
             },
           ),
         ],

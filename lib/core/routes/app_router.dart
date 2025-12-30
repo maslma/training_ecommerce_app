@@ -1,6 +1,6 @@
 import 'package:ecommerce/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:ecommerce/features/bottomnavbar/presentaion/view/bottom_nav_view.dart';
-import 'package:ecommerce/features/bottomnavbar/presentaion/view/data/bottom_nav_bar_cubit.dart';
+import 'package:ecommerce/features/bottomnavbar/presentaion/controller/bottom_nav_bar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/presentation/views/login_view.dart';

@@ -7,10 +7,35 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w700,
     color: AppColors.blackColor,
   );
+  static const font34WhiteWeight900 = TextStyle(
+    fontSize: 34,
+    fontWeight: FontWeight.w900,
+    color: AppColors.whiteColor,
+  );
   static const font11GrayWeight400 = TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w400,
     color: AppColors.grayColor,
+  );
+  static const font11BlackWeight400 = TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.w400,
+    color: AppColors.blackColor,
+  );
+  static const font11WhiteWeight400 = TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.w400,
+    color: AppColors.whiteColor,
+  );
+  static const font10RedWeight400 = TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.bold,
+    color: AppColors.primaryColor,
+  );
+  static const font14RedWeight500 = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.primaryColor,
   );
   static const font14DarkGrayWeight500 = TextStyle(
     fontSize: 14,
@@ -25,6 +50,11 @@ abstract class AppTextStyles {
   static const font14BlackWeight500 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
+    color: AppColors.blackColor,
+  );
+  static const font16BlackWeight400 = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
     color: AppColors.blackColor,
   );
   static const font14WhiteWeight500 = TextStyle(

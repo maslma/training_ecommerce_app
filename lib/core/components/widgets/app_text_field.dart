@@ -12,12 +12,16 @@ class AppTextField extends StatefulWidget {
     this.textInputAction,
     this.onChanged,
     this.validator,
+    this.focusNode,
+    this.editingComplete,
   });
   final String hintText;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
+  final FocusNode ? focusNode;
   final void Function(String)? onChanged;
+  final VoidCallback? editingComplete;
   final String? Function(String?)? validator;
 
   @override
@@ -50,6 +54,8 @@ class _AppTextFieldState extends State<AppTextField> {
       style: AppTextStyles.font14DarkGrayWeight500,
       keyboardType: widget.keyboardType,
       onChanged: _validate,
+      focusNode: widget.focusNode,
+      onEditingComplete: widget.editingComplete,
       validator: (value) {
         final error = widget.validator?.call(value);
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -63,7 +69,7 @@ class _AppTextFieldState extends State<AppTextField> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: AppTextStyles.font14GrayWeight500,
-        fillColor: AppColors.whiteColor,
+        fillColor: AppColors.whiteColor, 
         filled: true,
         border: OutlineInputBorder(
           borderRadius: 4.allBorderRadius,
@@ -72,7 +78,7 @@ class _AppTextFieldState extends State<AppTextField> {
         focusedBorder: OutlineInputBorder(
           borderRadius: 4.allBorderRadius,
           borderSide: BorderSide(
-            color: _isValid ? AppColors.successColor : AppColors.primaryColor,
+            color: _isValid ? AppColors.successColor : AppColors.whiteColor,
             width: 1.5,
           ),
         ),
